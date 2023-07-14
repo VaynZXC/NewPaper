@@ -22,7 +22,7 @@ class Category(models.Model):
     category = models.CharField(max_length = 255)
   
 class Post(models.Model):
-    author = models.ForeignKey(Author, on_delete = models.CASCADE)
+    author = models.ForeignKey(Author, on_delete = models.CASCADE, default='Автор не указан')
     article_or_news = models.IntegerField(default = 1)
     time_in = models.DateTimeField(auto_now_add = True)
     category = models.ManyToManyField(Category, through = 'PostCategory')
