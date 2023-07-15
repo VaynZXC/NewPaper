@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
+class Test(models.Model):
+    time_in = models.DateTimeField(auto_now_add = True)
 
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
@@ -22,8 +25,17 @@ class Category(models.Model):
     category = models.CharField(max_length = 255)
   
 class Post(models.Model):
-    author = models.ForeignKey(Author, on_delete = models.CASCADE, default='Автор не указан')
-    article_or_news = models.IntegerField(default = 1)
+    author = models.ForeignKey(Author, on_delete = models.CASCADE)
+
+    article = 'AR'
+    news = 'NE'
+
+    TYPE = [
+        (article, 'Статья'),
+        (news, 'Новость')
+        ]
+
+    art_or_news = models.CharField(max_length= 20, default = article)
     time_in = models.DateTimeField(auto_now_add = True)
     category = models.ManyToManyField(Category, through = 'PostCategory')
     title = models.CharField(max_length= 255)
