@@ -7,13 +7,13 @@ class Test(models.Model):
 
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    user_rating = models.IntegerField(default = 0)
+    user_rating = models.IntegerField(default=0)
 
     def like(self):
       self.user_rating += 1
 
     def dislike(self):
-      self.user_rating -+ 1
+      self.user_rating -= 1
 
     def rating_clear(self):
       self.user_rating = 0
@@ -55,7 +55,7 @@ class Post(models.Model):
       self.post_rating += 1
 
     def dislike(self):
-      self.post_rating -+ 1
+      self.post_rating -= 1
 
     def rating_clear(self):
       self.post_rating = 0
@@ -75,12 +75,23 @@ class Comment(models.Model):
       self.comment_rating += 1
 
     def dislike(self):
-      self.comment_rating -+ 1
+      self.comment_rating -= 1
 
     def rating_clear(self):
       self.comment_rating = 0
 
 def bestUser():
-    best_user = User.objects.all()
-    best_user.aggregate(Max('user_rating'))
-    print(best_user)
+    max_rating = Author.objects.latest('user_rating')
+    username = max_rating.user.username
+    rating = max_rating.user_rating
+    print('Лучший пользователь: \n Имя - ', username, '\n Рейтинг - ', rating)
+
+def allComments(post_name):
+    comments = Comment.objects.filter(post = post_name)
+    for comment in comments:
+      date = comment.time_in
+      user = comment.user.username
+      rating = comment.comment_rating
+      text = comment.comment
+      print('Все коменарии к посту ', post_name, '\n Дата создания - ', date, 
+            '\n Пользователь - ', user, '\n Рейтинг -', rating, '\n Текст -', text)
