@@ -93,5 +93,5 @@ def allComments(post_name):
       user = comment.user.username
       rating = comment.comment_rating
       text = comment.comment
-      print('Все коменарии к посту ', post_name, '\n Дата создания - ', date, 
+      print('Все коменарии к посту: ', post_name, '\n Дата создания - ', date, 
             '\n Пользователь - ', user, '\n Рейтинг -', rating, '\n Текст -', text)
