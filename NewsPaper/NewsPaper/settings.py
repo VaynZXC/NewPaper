@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'accounts'
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,10 +55,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'NewsPaper.urls'
 
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / '../templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
