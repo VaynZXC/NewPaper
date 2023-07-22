@@ -2,9 +2,52 @@
 {% extends 'layout/base.html' %}
 <!-- Название у нас будет proudcts -->
 {% block title %}
-Product
+Новости
 {% endblock title %}
 <!-- В контенте на странице мы выводим сам продукт, первичный ключ которого был передан в адрес -->
 {% block content %}
-<h1>{{ allNews }}</h1>
+  <h1>Все новости</h1>
+  {% if allNews %}
+    <table>
+      <tr>
+        <td>
+          Заголовок
+        </td>
+        <td>
+          Описание
+        </td>
+        <td>
+          Автор
+        </td>
+        <td>
+          Категория
+        </td>
+        <td>
+          Рейтинг
+        </td>
+      </tr>
+    {% for news in allNews %}
+      <tr>
+        <td>
+          {{ news.title }}
+        </td>
+        <td>
+          {{ news.text }}
+        </td>
+        <td>
+          {{ news.author }}
+        </td>
+        <td>
+          {{ news.category }}
+        </td>
+        <td>
+          {{ news.post_rating }}
+        </td>
+      </tr>
+    {% endfor%}
+    </table>
+    {{ allNews }}
+  {% else %}
+    <h2>Новостей нет!</h2>
+  {% endif %}
 {% endblock content %}

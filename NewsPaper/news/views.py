@@ -5,10 +5,11 @@ from news.models import Post
 # Create your views here.
 class PostsList(ListView):
     model = Post
-    template_name = 'templates/news/allnews.html'
+    template_name = 'news/allnews.html'
     context_object_name = 'allNews'
+    queryset = Post.objects.order_by('-id')
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'templates/news/news.html'
+    template_name = 'news/news.html'
     context_object_name = 'news'
