@@ -38,7 +38,9 @@
           {{ news.author }}
         </td>
         <td>
-          {{ news.category }}
+          {% for category in news.category.all %}
+          <a href="">{{category}}</a>
+          {% endfor %}
         </td>
         <td>
           {{ news.post_rating }}
@@ -46,7 +48,6 @@
       </tr>
     {% endfor%}
     </table>
-    {{ allNews }}
   {% else %}
     <h2>Новостей нет!</h2>
   {% endif %}

@@ -33,10 +33,10 @@ class Category(models.Model):
           (leisure, 'Досуг')
         ]
     
-    category = models.CharField(max_length = 255)
+    category = models.CharField(max_length = 2, choices=THEMES, unique=True)
 
     def __str__(self):
-      return f'{self.category}'
+      return self.get_category_display()
   
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete = models.CASCADE)
